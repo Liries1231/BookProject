@@ -1,13 +1,31 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Getting Started: Serving Web Content</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Book Details</title>
+    <meta charset="UTF-8">
 </head>
 <body>
-<div>Hello, {{name}}</div>
+<h1>Book Details</h1>
+<button onclick="goBack()">Back</button>
 
 
+<script>
+    function goBack() {
+        history.back();
+    }
+</script>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Author</th>
+    </tr>
+    <tr>
+        <td>{{book.id}}</td>
+        <td>{{book.name}}</td>
+        <td>{{book.author}}</td>
+    </tr>
+</table>
 </body>
-
 </html>
