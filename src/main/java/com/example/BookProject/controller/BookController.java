@@ -2,25 +2,26 @@ package com.example.BookProject.controller;
 
 import com.example.BookProject.entity.Book;
 import com.example.BookProject.repos.BookRepos;
+import com.example.BookProject.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
+
 public class BookController {
     @Autowired
-    private BookRepos bookRepos;
+    private BookService bookRepos;
 
     @GetMapping("/books")
     public String book(@RequestParam(name = "name", required = false, defaultValue = "Book name") String name,
@@ -32,7 +33,7 @@ public class BookController {
 
     @GetMapping
     public String main(Map<String, Object> model) {
-        Iterable<Book> books = bookRepos.findAll(); // вывожу полный список книг
+        Iterable<Book> books = bookRepos.getAllBooks(); // вывожу полный список книг
         model.put("AllBooks", books);
 
         return "main";
@@ -43,18 +44,31 @@ public class BookController {
     @GetMapping("/books/{id}")
     public String bookDetails(@PathVariable("id") Integer id, Model model) {
         //Переход на страницу книги
-        Book book = bookRepos.findById(id).orElse(null);
+        Book book = bookRepos.getBookById(id);
         model.addAttribute("book", book);
 
         return "books";
     }
     @PostMapping()
     public String add(@RequestParam String name, @RequestParam String author, Map<String, Object> model) {
-            Book book = new Book(name, author);  // добавляю новый объект
-            bookRepos.save(book); //сохраняю его
-        Iterable<Book> books = bookRepos.findAll(); //вывожу полный список
+        Book book = new Book(name, author);  // добавляю новый объект
+        bookRepos.createBook(book); //сохраняю его
+        Iterable<Book> books = bookRepos.getAllBooks(); //вывожу полный список
         model.put("AllBooks", books); //сохраняю в мапу
         return "main";
+
+    }
+    @GetMapping("{id}")
+    public String delete(@PathVariable ("id") int id){
+        bookRepos.deleteById(id);
+        return "redirect:/";
+
+    }
+    @PutMapping("{id}")
+    public ResponseEntity<Book> updateBook(@PathVariable int id, @RequestBody Book updatedBook) {
+        Book book = bookRepos.updateBook(id, updatedBook);
+        return ResponseEntity.ok(book);
+    }
 
     }
 
@@ -63,4 +77,3 @@ public class BookController {
 
 
 
-}
