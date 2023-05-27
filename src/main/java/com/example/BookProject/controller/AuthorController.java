@@ -31,6 +31,7 @@ public class AuthorController {
         author.ifPresent(value -> model.addAttribute("author", value));
         return "author";
     }
+
     @PostMapping("/author")
     public String addAuthor(@RequestParam int age, @RequestParam String country, Map<String,Object> model){
         Author author = new Author(age,country);

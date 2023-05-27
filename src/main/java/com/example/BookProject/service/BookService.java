@@ -49,6 +49,7 @@ public class BookService {
         // Обновление других полей книги
 
         return bookRepos.save(existingBook);
+
     }
     public Page<Book> getBooksPage(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);

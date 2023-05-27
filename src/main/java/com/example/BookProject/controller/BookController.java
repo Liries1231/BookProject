@@ -32,6 +32,7 @@ public class BookController {
     }
 
     @GetMapping
+
     public String main(Map<String, Object> model) {
         Iterable<Book> books = bookRepos.getAllBooks(); // вывожу полный список книг
         model.put("AllBooks", books);

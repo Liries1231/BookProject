@@ -11,6 +11,7 @@ public class Author {
     @GeneratedValue (strategy = GenerationType.AUTO)
     Integer authorId;
     int age;
+
     String country;
 
     public Author() {
