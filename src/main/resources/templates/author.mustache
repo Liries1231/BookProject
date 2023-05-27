@@ -1,9 +1,24 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <title>Book info</title>
-    <meta charset="UTF-8">
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-<h1>Author info</h1>
+<div>
+</div>
+<h2>All Books:</h2>
+<table>
+    <tr>
 
+        <th>Author's page</th>
+    </tr>
+{{#author}}
+        <tr>
+            <td>{{book.author}}</td>
+        </tr>
+    {{/author}}
+
+        </table>
+</body>
+</html>

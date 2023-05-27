@@ -2,7 +2,13 @@ package com.example.BookProject.controller;
 
 import com.example.BookProject.entity.Book;
 import com.example.BookProject.repos.BookRepos;
+import com.example.BookProject.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,8 +55,13 @@ public class BookController {
             bookRepos.save(book); //сохраняю его
         Iterable<Book> books = bookRepos.findAll(); //вывожу полный список
         model.put("AllBooks", books); //сохраняю в мапу
-
         return "main";
 
     }
+
+
+
+
+
+
 }
