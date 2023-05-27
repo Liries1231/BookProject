@@ -12,6 +12,7 @@ public class Book {
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
 
+
     String name;
     String author;
 
