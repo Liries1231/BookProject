@@ -2,7 +2,6 @@ package com.example.BookProject.controller;
 
 import com.example.BookProject.entity.Book;
 import com.example.BookProject.repos.BookRepos;
-import com.example.BookProject.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
